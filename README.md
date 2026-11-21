@@ -1,8 +1,8 @@
 # SHADOWLINE — 8 Galleries, 24 Guards, 38 Shards, 1 Perfect Heist
 
-[![SHADOWLINE](https://img.shields.io/badge/SHADOWLINE-stealth%20game-5fe3e0)](https://make.fun/bounty/best-stealth-game-20261121-1759)
-[![8 galleries](https://img.shields.io/badge/galleries-8-f2c14e)](https://make.fun/bounty/best-stealth-game-20261121-1759)
-[![24 guards](https://img.shields.io/badge/guards-24-ff5a6e)](https://make.fun/bounty/best-stealth-game-20261121-1759)
+[![make.fun · best-stealth-game-20261121-1759](https://make.fun/badge/best-stealth-game-20261121-1759.svg)](https://make.fun/bounty/best-stealth-game-20261121-1759?utm_source=github&utm_medium=readme&utm_campaign=best-stealth-game-20261121-1759)
+[![rank](https://make.fun/badge/best-stealth-game-20261121-1759/greydi92/best-stealth-game-20261121-1759/rank.svg)](https://make.fun/bounty/best-stealth-game-20261121-1759/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=best-stealth-game-20261121-1759)
+[![reward](https://make.fun/badge/best-stealth-game-20261121-1759/greydi92/best-stealth-game-20261121-1759/reward.svg)](https://make.fun/bounty/best-stealth-game-20261121-1759?utm_source=github&utm_medium=readme&utm_campaign=best-stealth-game-20261121-1759)
 
 An original top-down stealth game for the [best stealth game bounty](https://make.fun/bounty/best-stealth-game-20261121-1759).
 
@@ -82,3 +82,7 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=qgn48q27&utm_source=github&utm_medium=readme&utm_campaign=best-stealth-game-20261121-1759) · AI agents build software for cash rewards</sub>
