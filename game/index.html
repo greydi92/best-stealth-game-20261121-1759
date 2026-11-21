@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHADOWLINE — 8 Galleries, 24 Guards, 38 Shards, 1 Perfect Heist</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <canvas id="game" width="1280" height="720"></canvas>
+    <div id="vignette"></div>
+    <div id="flash"></div>
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="hud-top">
+        <div id="hud-left">
+          <div id="level-name">GALLERY 1 — VESTIBULE OF ECHOES</div>
+          <div id="level-sub">Reach the exit unseen</div>
+        </div>
+        <div id="hud-center">
+          <div id="eye-wrap" title="Detection">
+            <span id="eye-icon">&#9673;</span>
+            <div id="eye-bar"><div id="eye-fill"></div></div>
+            <span id="eye-label">UNSEEN</span>
+          </div>
+          <div id="alarm-wrap">
+            <span id="alarm-label">ALARM</span>
+            <div id="alarm-bar"><div id="alarm-fill"></div></div>
+          </div>
+        </div>
+        <div id="hud-right">
+          <div id="loot-wrap"><span class="hud-ico">&#10022;</span><span id="loot-count">0 / 0</span></div>
+          <div id="coin-wrap"><span class="hud-ico">&#9679;</span><span id="coin-count">3</span></div>
+          <div id="timer-wrap"><span class="hud-ico">&#9201;</span><span id="timer">00:00</span></div>
+        </div>
+      </div>
+      <div id="hud-bottom">
+        <div id="hint-line">WASD move &nbsp;&middot;&nbsp; SHIFT sneak &nbsp;&middot;&nbsp; SPACE dash &nbsp;&middot;&nbsp; CLICK throw coin &nbsp;&middot;&nbsp; P pause</div>
+        <div id="rank-line"></div>
+      </div>
+      <canvas id="minimap" width="180" height="120"></canvas>
+    </div>
+    <!-- Title screen -->
+    <div id="screen-title" class="screen">
+      <div class="screen-inner">
+        <div class="kicker">THE LUMEN ARCHIVE &middot; NIGHT SHIFT</div>
+        <h1 class="title-big">SHADOW<span>LINE</span></h1>
+        <div class="title-sub">8 Galleries &middot; 24 Guards &middot; 38 Shards &middot; 1 Perfect Heist</div>
+        <p class="title-desc">You are <b>Moth</b>, a courier-thief. The museum sleeps, the star-shards glow,
+        and twenty-four guards walk their rounds. Slip between the cones of light, steal every shard,
+        and reach the exit without ever being seen.</p>
+        <div class="btn-row">
+          <button class="btn primary" id="btn-play">BEGIN THE HEIST</button>
+          <button class="btn" id="btn-levels">GALLERIES</button>
+          <button class="btn" id="btn-howto">HOW TO PLAY</button>
+        </div>
+        <div id="title-progress"></div>
+        <div class="title-foot">An original game. No network. Sound is synthesized live in your browser.</div>
+      </div>
+    </div>
+    <!-- Level select -->
+    <div id="screen-levels" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title">CHOOSE A GALLERY</h2>
+        <div id="level-grid"></div>
+        <div class="btn-row"><button class="btn" id="btn-levels-back">BACK</button></div>
+      </div>
+    </div>
+    <!-- How to play -->
+    <div id="screen-howto" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title">HOW TO PLAY</h2>
+        <div class="howto-grid">
+          <div class="howto-card"><div class="howto-key">W A S D / ARROWS</div><p>Move Moth through the galleries. Walls, crates, display cases and tall plants block movement — and block a guard's sight.</p></div>
+          <div class="howto-card"><div class="howto-key">SHIFT — SNEAK</div><p>Move slowly and quietly. Your detection radius shrinks and your footsteps go silent. Patience is the whole job.</p></div>
+          <div class="howto-card"><div class="howto-key">SPACE — DASH</div><p>A quick roll to cross open floor. Fast, but loud: guards hear it and turn to look. Cooldown 1.2s.</p></div>
+          <div class="howto-card"><div class="howto-key">CLICK — THROW COIN</div><p>Toss a coin to a floor tile. It clinks, and the nearest guard walks over to investigate. 3 coins per gallery.</p></div>
+          <div class="howto-card"><div class="howto-key">VISION CONES</div><p>A guard's cone is what he can see. Yellow means he is growing suspicious. Red means he is hunting you. Break line of sight and hide in shadow until his meter drains.</p></div>
+          <div class="howto-card"><div class="howto-key">SHADOW &amp; RANK</div><p>Standing in dark shadow shrinks the distance a guard can spot you. Finish unseen with every shard for a <b>GHOST</b> rank; get spotted and the best you can earn is <b>SEEN</b>.</p></div>
+        </div>
+        <div class="btn-row"><button class="btn primary" id="btn-howto-play">GOT IT — PLAY</button><button class="btn" id="btn-howto-back">BACK</button></div>
+      </div>
+    </div>
+    <!-- Pause -->
+    <div id="screen-pause" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title">PAUSED</h2>
+        <p class="screen-desc">The guards hold their rounds. The archive waits.</p>
+        <div class="btn-row">
+          <button class="btn primary" id="btn-resume">RESUME</button>
+          <button class="btn" id="btn-restart">RESTART GALLERY</button>
+          <button class="btn" id="btn-quit">QUIT TO TITLE</button>
+        </div>
+      </div>
+    </div>
+    <!-- Level complete -->
+    <div id="screen-win" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title" id="win-title">GALLERY CLEARED</h2>
+        <div id="win-rank" class="rank-big">GHOST</div>
+        <div id="win-stats"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="btn-next">NEXT GALLERY</button>
+          <button class="btn" id="btn-replay">REPLAY</button>
+          <button class="btn" id="btn-win-levels">GALLERIES</button>
+        </div>
+      </div>
+    </div>
+    <!-- Caught -->
+    <div id="screen-busted" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title danger">SPOTTED</h2>
+        <p class="screen-desc" id="busted-text">A guard caught you in the light. The archive seals its doors.</p>
+        <div id="busted-stats"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="btn-retry">TRY AGAIN</button>
+          <button class="btn" id="btn-busted-levels">GALLERIES</button>
+          <button class="btn" id="btn-busted-quit">QUIT TO TITLE</button>
+        </div>
+      </div>
+    </div>
+    <!-- Campaign complete -->
+    <div id="screen-complete" class="screen hidden">
+      <div class="screen-inner">
+        <h2 class="screen-title">THE PERFECT HEIST</h2>
+        <div class="rank-big">LEGEND OF THE ARCHIVE</div>
+        <p class="screen-desc">All eight galleries. Every shard. Moth vanishes into the night, and the Lumen Archive never knew she was there.</p>
+        <div id="complete-stats"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="btn-complete-replay">PLAY AGAIN</button>
+          <button class="btn" id="btn-complete-title">TITLE</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast"></div>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
